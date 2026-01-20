@@ -16,6 +16,7 @@ class HealthRecord extends Model
         'diastolik',
         'denyut_nadi',
         'catatan',
+        'recommendations',
     ];
 
     protected function casts(): array
@@ -23,6 +24,7 @@ class HealthRecord extends Model
         return [
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
+            'recommendations' => 'array',
         ];
     }
 

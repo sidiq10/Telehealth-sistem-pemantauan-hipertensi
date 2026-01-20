@@ -18,6 +18,10 @@ class Feedback extends Model
         'message',
         'is_read',
         'read_at',
+        'rating',
+        'anonymous',
+        'follow_up_sent',
+        'follow_up_sent_at',
     ];
 
     protected function casts(): array
@@ -27,6 +31,9 @@ class Feedback extends Model
             'read_at' => 'datetime',
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
+            'anonymous' => 'boolean',
+            'follow_up_sent' => 'boolean',
+            'follow_up_sent_at' => 'datetime',
         ];
     }
 

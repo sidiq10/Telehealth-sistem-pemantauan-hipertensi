@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Pasien\DashboardController as PasienDashboardController;
+use App\Http\Controllers\Pasien\ChatbotController;
 use App\Http\Controllers\Dokter\DashboardController as DokterDashboardController;
+use App\Http\Controllers\AnalyticsController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -32,6 +34,13 @@ Route::middleware(['auth', 'verified', 'role:pasien'])->prefix('pasien')->name('
     // Feedback
     Route::get('/feedback', [PasienDashboardController::class, 'feedback'])->name('feedback');
     Route::post('/feedback/reply', [PasienDashboardController::class, 'sendReply'])->name('send-reply');
+    
+    // Chatbot
+    Route::get('/chatbot', [ChatbotController::class, 'index'])->name('chatbot');
+    Route::post('/chatbot/send', [ChatbotController::class, 'sendMessage'])->name('chatbot.send');
+    Route::get('/chatbot/history', [ChatbotController::class, 'getHistory'])->name('chatbot.history');
+    Route::post('/chatbot/clear', [ChatbotController::class, 'clear'])->name('chatbot.clear');
+    Route::get('/chatbot/test-connection', [ChatbotController::class, 'testConnection'])->name('chatbot.test');
 });
 
 // ===== DOKTER ROUTES =====
@@ -46,6 +55,11 @@ Route::middleware(['auth', 'verified', 'role:dokter'])->prefix('dokter')->name('
     
     // Search
     Route::get('/search', [DokterDashboardController::class, 'search'])->name('search');
+    
+    // Analytics
+    Route::get('/analytics', [AnalyticsController::class, 'index'])->name('analytics');
+    Route::get('/analytics/patient/{patient}', [AnalyticsController::class, 'patientFeedback'])->name('analytics.patient');
+    Route::get('/analytics/trends/engagement', [AnalyticsController::class, 'engagementTrends'])->name('analytics.trends');
 });
 
 // ===== PROFILE ROUTES =====

@@ -30,12 +30,17 @@ class DashboardController extends Controller
         
         // Notifikasi feedback yang belum dibaca
         $unreadFeedbacks = $user->receivedFeedbacks()->where('is_read', false)->count();
+        
+        // Gamification data
+        $gamificationService = app(\App\Services\GamificationService::class);
+        $gamificationProgress = $gamificationService->getProgress($user);
 
         return view('pasien.dashboard', [
             'latestRecord' => $latestRecord,
             'avgStats' => $avgStats,
             'recentRecords' => $recentRecords,
             'unreadFeedbacks' => $unreadFeedbacks,
+            'gamification' => $gamificationProgress,
         ]);
     }
 

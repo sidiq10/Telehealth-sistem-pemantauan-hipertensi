@@ -16,6 +16,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        // Seed badges first
+        $this->call(BadgeSeeder::class);
         // Create 2 Doctors
         $dokter1 = User::create([
             'name' => 'Dr. Ahmad Suryanto',

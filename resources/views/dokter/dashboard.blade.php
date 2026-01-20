@@ -36,6 +36,13 @@
                 </div>
             </div>
 
+            <!-- Analytics Button -->
+            <div class="mb-8">
+                <a href="{{ route('dokter.analytics') }}" class="inline-flex items-center gap-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-6 py-3 rounded-lg hover:from-indigo-700 hover:to-purple-700 font-semibold shadow-lg">
+                    📊 Lihat Analytics & Engagement Metrics
+                </a>
+            </div>
+
             <!-- Daftar Pasien -->
             <div class="bg-white rounded-lg shadow">
                 <div class="p-6 border-b border-gray-200 flex justify-between items-center">

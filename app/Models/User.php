@@ -25,6 +25,9 @@ class User extends Authenticatable
         'phone',
         'birthdate',
         'address',
+        'points',
+        'streak_days',
+        'last_data_entry_date',
     ];
 
     /**
@@ -48,6 +51,7 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
             'birthdate' => 'date',
+            'last_data_entry_date' => 'date',
         ];
     }
 
@@ -101,5 +105,15 @@ class User extends Authenticatable
     public function unreadFeedbackCount()
     {
         return $this->receivedFeedbacks()->where('is_read', false)->count();
+    }
+
+    /**
+     * Get badges earned by user
+     */
+    public function badges()
+    {
+        return $this->belongsToMany(Badge::class, 'user_badges')
+                    ->withPivot('earned_at')
+                    ->withTimestamps();
     }
 }
